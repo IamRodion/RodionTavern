@@ -1,0 +1,36 @@
+body{
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.table th, .table td{
+    vertical-align: middle !important;
+}
+
+.icons {
+    max-width: 22px;
+    max-height: 22px;
+}
+
+.melee {
+    color: #00FFFF;
+}
+
+.magic {
+    color: #FFA500
+}
+
+.distance {
+    color: #FF69B4
+}
+
+.spirit {
+    color: #87CEEB
+}
+
+.defence {
+    color: #B3B2B2
+}
+
+.elite {
+    color: #FFD700
+}
