@@ -6,9 +6,10 @@
 <div class="row">
     <div class="col-12">
         <div class="table-responsive">
-            <table class="table table-secondary table-striped text-center align-middle">
+            <table id="table_trades" class="table table-secondary table-striped text-center align-middle">
                 <thead class="table-primary">
                     <tr>
+                        <th>#</th>
                         <th>Item</th>
                         <th>Primary Stat</th>
                         <th>Secondary Stat</th>
@@ -18,18 +19,7 @@
                         <th>Price</th>
                     </tr>
                 </thead>
-                <tbody>
-                    {% for trade in object_list %}
-                    <tr>
-                        <td><img src="{% static trade.item.icon %}" class="icons" alt="" srcset=""><br>{{ trade.item.name }}</td>
-                        <td>{{ trade.item.primary_stat }} {{ trade.amount_primary_stat }}</td>
-                        <td>{{ trade.secondary_stat }} {{ trade.amount_secondary_stat }}</td>
-                        <td>{{ trade.bonus_1 }} <br> {{ trade.bonus_2 }}</td>
-                        <td><img src="{% static 'img/others/elite.webp' %}" class="icons" alt="" srcset=""><br>{{ trade.elite }}</td>
-                        <td>{{ trade.enchant }}</td>
-                        <td><img src="{% static 'img/others/gold.png' %}" class="icons" alt="" srcset=""><br>{{ trade.price }}</td>
-                    </tr>
-                    {% endfor %}
+                <tbody id="table_body_trades">
                 </tbody>
             </table>
         </div>

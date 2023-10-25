@@ -1,37 +1,9 @@
-#from django.http.response import JsonResponse
+from django.http.response import JsonResponse
 from typing import Any
 #from django.shortcuts import render
 from django.db.models import OuterRef, Subquery
 from django.views.generic import ListView
 from .models import Trade, User, Item
-
-# Create your views here.
-# def home(request):
-#     return render(request, 'home.html')
-
-# def trades(request):
-#     trades = Trade.objects.all()
-
-#     trades = trades.annotate(
-#         username=Subquery(
-#             User.objects.filter(id=OuterRef('user_id')).values('username')[:1] 
-#         )
-#     )
-
-#     trades = trades.annotate(
-#         item_name=Subquery(
-#             Item.objects.filter(id=OuterRef('item_id')).values('name')[:1]
-#         )  
-#     )
-
-#     context = {
-#         'trades': trades
-#     }
-
-#     return render(request, 'trades.html', context)
-
-# def users(request):
-#     return render(request, 'users.html')
 
 
 #----------------------Home----------------------
@@ -84,3 +56,30 @@ class UsersView(ListView):
   def get_queryset(self):
     return None
     #return User.objects.all()
+
+#----------------------Trades List for Datatable----------------------
+def list_trades(_request):
+    trades = Trade.objects.values()
+
+    trades = trades.annotate(
+        username=Subquery(
+            User.objects.filter(id=OuterRef('user_id')).values('username')[:1]
+        )  
+    )
+
+    trades = trades.annotate(
+        item_icon=Subquery(
+            Item.objects.filter(id=OuterRef('item_id')).values('icon')[:1]
+        ),
+        item_name=Subquery(
+            Item.objects.filter(id=OuterRef('item_id')).values('name')[:1]
+        ),
+        item_primary_stat=Subquery(
+            Item.objects.filter(id=OuterRef('item_id')).values('primary_stat')[:1]
+        )
+    )
+    trades = list(trades)
+
+    # trades = list(Trade.objects.values())
+    data = {'trades': trades}
+    return JsonResponse(data)

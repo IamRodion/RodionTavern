@@ -6,6 +6,11 @@ body{
     vertical-align: middle !important;
 }
 
+th{
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
 .icons {
     max-width: 22px;
     max-height: 22px;

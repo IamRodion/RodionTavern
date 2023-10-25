@@ -1,6 +1,15 @@
 from django.db import models
 from django.utils.html import format_html
 
+colors = {
+    'Magic': '#FFA500',
+    'Distance': '#FF69B4',
+    'Melee': '#00FFFF',
+    'Spirit': '#87CEEB',
+    'Defense': '#FFFFFF',
+    'Elite': '#FFD700'
+}
+
 # Create your models here.
 
 class User(models.Model):
@@ -54,14 +63,7 @@ class Item(models.Model):
         return f"{self.name}"
 
     def primary_stat_colored(self):
-        if self.primary_stat == 'Magic':
-            return format_html(f'<span style="color: #FFA500;">{self.primary_stat}</span>')
-        elif self.primary_stat == 'Distance':
-            return format_html(f'<span style="color: #FF69B4;">{self.primary_stat}</span>')
-        elif self.primary_stat == 'Melee':
-            return format_html(f'<span style="color: #00FFFF;">{self.primary_stat}</span>')
-        else:
-            return self.primary_stat
+        return format_html(f'<span style="color: {colors[self.primary_stat]};">{self.primary_stat}</span>')
         
     primary_stat_colored.short_description = "Primary"
     #class_item.admin_order_field = "name"
@@ -115,26 +117,26 @@ class Trade(models.Model):
     def __str__(self):
         return f"{self.item} ({self.user} @ {self.price})"
 
+    # def armour_fortified(self):
+    #     if 'Fortified' in (self.bonus_1, self.bonus_2):
+    #         return (self.item.level//10) + self.item.armour
+    #     else:
+    #         return self.item.armour
+
     def item_colored(self):
         if self.elite:
             return format_html(f'<span style="color: #FFD700;">{self.item.name}</span>')
         else:
-            return self.item.name
+            return f'{self.item.name}'
 
     item_colored.short_description = "Item"
 
+    def primary_stat_colored(self):
+        return format_html(f'<span style="color: {colors[self.item.primary_stat]};">{self.item.primary_stat} {self.amount_primary_stat} ({self.item.max_amount_primary_stat})</span>')
+    
+    primary_stat_colored.short_description = "Primary"
+
     def secondary_stat_colored(self):
-        if self.secondary_stat == 'Magic':
-            return format_html(f'<span style="color: #FFA500;">{self.secondary_stat}</span>')
-        elif self.secondary_stat == 'Distance':
-            return format_html(f'<span style="color: #FF69B4;">{self.secondary_stat}</span>')
-        elif self.secondary_stat == 'Melee':
-            return format_html(f'<span style="color: #00FFFF;">{self.secondary_stat}</span>')
-        elif self.secondary_stat == 'Spirit':
-            return format_html(f'<span style="color: #87CEEB;">{self.secondary_stat}</span>')
-        elif self.secondary_stat == 'Defense':
-            return format_html(f'<span style="color: #FFFFFF;">{self.secondary_stat}</span>')
-        else:
-            return self.secondary_stat
+        return format_html(f'<span style="color: {colors[self.secondary_stat]};">{self.secondary_stat} {self.amount_secondary_stat} ({self.item.max_amount_secondary_stat if self.secondary_stat == self.item.primary_stat else (self.item.max_amount_secondary_stat*2)})</span>')
         
-    secondary_stat_colored.short_description = "Secondary Stat"
+    secondary_stat_colored.short_description = "Secondary"

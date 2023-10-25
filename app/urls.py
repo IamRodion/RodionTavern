@@ -1,4 +1,5 @@
 from django.urls import path
+from . import views
 from .views import HomeView, TradesView, UsersView
 
 # urlpatterns=[
@@ -10,5 +11,7 @@ from .views import HomeView, TradesView, UsersView
 urlpatterns=[
     path('', HomeView.as_view(), name='home'),
     path('trades/', TradesView.as_view(), name='trades'),
-    path('users/', UsersView.as_view(), name='users')
+    path('users/', UsersView.as_view(), name='users'),
+    path('list_trades/', views.list_trades, name='list_trades')
+
 ]

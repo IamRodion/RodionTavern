@@ -35,8 +35,8 @@ class ItemAdmin(admin.ModelAdmin):
 
 @admin.register(Trade)
 class TradeAdmin(admin.ModelAdmin):
-    list_display = ('id', 'item_colored', 'user', 'amount_primary_stat', 'secondary_stat_colored', 'amount_secondary_stat', 'price', 'date')
+    list_display = ('id', 'item_colored', 'user', 'primary_stat_colored', 'secondary_stat_colored', 'enchant', 'price', 'date')
     list_display_links = ('id',)
-    list_filter = ('user', 'price', 'date')
-    ordering = ('id', 'date', 'item', 'user')
+    list_filter = ('user', 'date')
+    ordering = ('id', 'date', 'user')
     search_fields = ('item', 'user')
