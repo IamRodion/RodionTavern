@@ -1,3 +1,15 @@
+/* Paleta de colores monocromática
+Mix: https://hue.tools/mix?format=hex&mode=lch&colors=158cbaff%3B020c10ff
+Paleta: https://hue.tools/info?format=hex&color=158cbaff
+
+#158cba Base
+#1aace4 Claro
+#020c10 Oscuro
+#072c3a Semi-Oscuro
+#0b4c65 Medio
+#106c8f Casi Base
+*/
+
 body{
     font-family: 'Ubuntu', sans-serif;
 }
@@ -17,25 +29,55 @@ th{
 }
 
 .melee {
-    color: #00FFFF;
+    /* color: #00FFFF !important;
+    font-weight: bold; */
+
+    background-color: #00FFFF !important;
+    font-weight: 400 !important;
+    font-size: 0.9rem;
 }
 
 .magic {
-    color: #FFA500
+    /* color: #FFA500 !important;
+    font-weight: bold; */
+
+    background-color: #FFA500 !important;
+    font-weight: 400 !important;
+    font-size: 0.9rem;
 }
 
 .distance {
-    color: #FF69B4
+    /* color: #FF69B4 !important;
+    font-weight: bold; */
+
+    background-color: #FF69B4 !important;
+    font-weight: 400 !important;
+    font-size: 0.9rem;
 }
 
 .spirit {
-    color: #87CEEB
+    /* color: #87CEEB !important;
+    font-weight: bold; */
+
+    background-color: #87CEEB !important;
+    font-weight: 400 !important;
+    font-size: 0.9rem;
 }
 
-.defence {
-    color: #B3B2B2
+.defense {
+    /* color: #B3B2B2 !important;
+    font-weight: bold; */
+
+    background-color: #B3B2B2 !important;
+    font-weight: 400 !important;
+    font-size: 0.9rem;
 }
 
 .elite {
-    color: #FFD700
+    /* color: #FFD700 !important;
+    font-weight: bold; */
+
+    background-color: #FFD700 !important;
+    font-weight: 400 !important;
+    font-size: 0.9rem;
 }

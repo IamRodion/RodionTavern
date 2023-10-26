@@ -1,22 +1,30 @@
 {% extends "layout.html" %}
-
 {% load static %}
+
+{% block head %}
+    <!-- Datatable.js -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css"> -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css">
+    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css"> -->
+{% endblock%}
+
 {% block content %}
 <h1>{{ title }}</h1>
 <div class="row">
     <div class="col-12">
         <div class="table-responsive">
-            <table id="table_trades" class="table table-secondary table-striped text-center align-middle">
+            <table id="table_trades" class="table table-active table-striped text-center align-middle">
                 <thead class="table-primary">
                     <tr>
                         <th>#</th>
                         <th>Item</th>
-                        <th>Primary Stat</th>
-                        <th>Secondary Stat</th>
+                        <th>Primary</th>
+                        <th>Secondary</th>
                         <th>Bonus</th>
                         <th>Elite</th>
                         <th>Enchant</th>
                         <th>Price</th>
+                        <th>More</th>
                     </tr>
                 </thead>
                 <tbody id="table_body_trades">
@@ -25,4 +33,15 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block endbody %}
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <!-- datatables -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
+    <!-- <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script> -->
+    <!-- javascript -->
+    <script src="{% static 'js/main.js' %}"></script>
 {% endblock %}
