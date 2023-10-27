@@ -1,0 +1,94 @@
+/* Paleta de colores monocromática
+Mix: https://hue.tools/mix?format=hex&mode=lch&colors=158cbaff%3B020c10ff
+Paleta: https://hue.tools/info?format=hex&color=158cbaff
+
+#158cba Base
+#1aace4 Claro
+#020c10 Oscuro
+#072c3a Semi-Oscuro
+#0b4c65 Medio
+#106c8f Casi Base
+*/
+
+body{
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.navbar-nav{
+    --bs-navbar-color: rgba(255, 255, 255);
+    --bs-navbar-hover-color: rgba(255, 255, 255) !important;
+}
+
+.table th, .table td{
+    vertical-align: middle !important;
+}
+
+th{
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+.icons {
+    max-width: 22px;
+    max-height: 22px;
+}
+
+.melee {
+    /* color: #00FFFF !important;
+    font-weight: bold;
+    font-size: var(--bs-body-font-size); */
+
+    background-color: #00FFFF !important;
+    font-weight: 500 !important;
+    font-size: var(--bs-body-font-size);
+}
+
+.magic {
+    /* color: #FFA500 !important;
+    font-weight: bold;
+    font-size: var(--bs-body-font-size); */
+
+    background-color: #FFA500 !important;
+    font-weight: 500 !important;
+    font-size: var(--bs-body-font-size);
+}
+
+.distance {
+    /* color: #FF69B4 !important;
+    font-weight: bold;
+    font-size: var(--bs-body-font-size); */
+
+    background-color: #FF69B4 !important;
+    font-weight: 500 !important;
+    font-size: var(--bs-body-font-size);
+}
+
+.spirit {
+    /* color: #87CEEB !important;
+    font-weight: bold;
+    font-size: var(--bs-body-font-size); */
+
+    background-color: #87CEEB !important;
+    font-weight: 500 !important;
+    font-size: var(--bs-body-font-size);
+}
+
+.defense {
+    /* color: #B3B2B2 !important;
+    font-weight: bold;
+    font-size: var(--bs-body-font-size); */
+
+    background-color: #B3B2B2 !important;
+    font-weight: 500 !important;
+    font-size: var(--bs-body-font-size);
+}
+
+.elite {
+    /* color: #FFD700 !important;
+    font-weight: bold;
+    font-size: var(--bs-body-font-size); */
+
+    background-color: #FFD700 !important;
+    font-weight: 500 !important;
+    font-size: var(--bs-body-font-size);
+}

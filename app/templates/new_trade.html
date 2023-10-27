@@ -1,0 +1,135 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+<p>Here, you'll see the form for new trades</p>
+
+<div class="col-12">
+    <form action="/new_trade/" method="post">
+        {% csrf_token %}
+        <div class="row mb-3 align-items-center">
+            <div class="col-auto">
+                <label class="col-form-label" for="">Select an item</label>
+            </div>
+            <div class="col-auto">
+                <select class="form-control" id="">
+                    {% for item in object_list %}
+                    <option value="{{ item.id }}">{{ item.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="row mb-3 align-items-center">
+            <div class="col-auto">
+                <label for="" class="col-form-label">Primary</label>
+            </div>
+            <div class="col-auto">
+                <input class="form-control" type="text" value="Magic" aria-label="Disabled input example" disabled readonly>
+            </div>
+            <div class="col-auto">
+                <input min="0" type="number" id="" class="form-control" placeholder="Amount" required>
+            </div>
+        </div>
+
+        <div class="row mb-3 align-items-center">
+            <div class="col-auto">
+                <label for="" class="col-form-label">Secondary</label>
+            </div>
+            <div class="col-auto">
+                <input type="radio" class="btn-check" name="options-outlined" id="warning-outlined" autocomplete="off" checked>
+                <label class="btn btn-outline-warning" for="warning-outlined">Magic</label>
+
+                <input type="radio" class="btn-check" name="options-outlined" id="dark-outlined" autocomplete="off">
+                <label class="btn btn-outline-dark" for="dark-outlined">Defense</label>
+                
+                <input type="radio" class="btn-check" name="options-outlined" id="info-outlined" autocomplete="off">
+                <label class="btn btn-outline-info" for="info-outlined">Spirit</label>
+            </div>
+            <div class="col-auto">
+                <input type="number" id="" class="form-control" placeholder="Amount" required>
+            </div>
+        </div>
+
+        <div class="row mb-3 align-items-center">
+            <div class="col-auto">
+                <label for="" class="col-form-label">Bonus</label>
+            </div>
+            <div class="col-auto">
+                <select class="form-control" id="">
+                    <option value="Crit Chance">Magic</option>
+                    <option value="HP Regen">Distance</option>
+                    <option value="Mana Regen">Melee</option>
+                    <option value="Potion Bonus">Defense</option>
+                    <option value="Leech">Spirit</option>
+                    <option value="Money Find">Spirit</option>
+                    <option value="Thorns">Spirit</option>
+                    <option value="Omni Resist">Spirit</option>
+                    <option value="Fortified">Spirit</option>
+                    <option value="Empowered">Spirit</option>
+                    <option value="Spirit">Spirit</option>
+                    <option value="Spirit">Spirit</option>
+                </select>
+            </div>
+            <div class="col-auto">
+                <select class="form-control" id="">
+                    <option value="Crit Chance">Magic</option>
+                    <option value="HP Regen">Distance</option>
+                    <option value="Mana Regen">Melee</option>
+                    <option value="Potion Bonus">Defense</option>
+                    <option value="Leech">Spirit</option>
+                    <option value="Money Find">Spirit</option>
+                    <option value="Thorns">Spirit</option>
+                    <option value="Omni Resist">Spirit</option>
+                    <option value="Fortified">Spirit</option>
+                    <option value="Empowered">Spirit</option>
+                    <option value="Spirit">Spirit</option>
+                    <option value="Spirit">Spirit</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row mb-3 align-items-center">
+            <div class="col-auto">
+                <label for="" class="col-form-label">Elite</label>
+            </div>
+            <div class="col-auto">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+              </div>
+        </div>
+
+        <div class="row mb-3 align-items-center">
+            <div class="col-auto">
+                <label for="">Enchant</label>
+            </div>
+            <div class="col-auto">
+                <select class="form-control" id="">
+                    <option selected>No</option>
+                    <option value="">Mana</option>
+                    <option value="">Fire</option>
+                    <option value="">Ice</option>
+                    <option value="">Physical</option>
+                    <option value="">Nature</option>
+                    <option value="">Energy</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row mb-3 align-items-center">
+            <div class="col-auto">
+                <label for="">Price</label>
+            </div>
+            <div class="col-auto">
+                <input min="0" type="number" id="" class="form-control" placeholder="Amount" required>
+            </div>
+
+        </div>
+
+        <div class="row mb-3 align-items-center">
+            <div class="col-auto">
+                <button class="btn btn-primary" type="submit">Create Trade</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
