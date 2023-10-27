@@ -2,13 +2,21 @@ let dataTable;
 let dataTableIsInitialized = false;
 
 const dataTableOptions = {
+    // responsive: true,
     columnDefs: [
         // { className:'centered', targets: [0, 1, 2, 3, 4, 5, 6, 7] },
-        { orderable: false, targets: [3, 4] },
-        { searchable: false, targets: [0, 7] }
+        { orderable: false, targets: [3, 4, 8] },
+        { searchable: false, targets: [0, 7, 8] },
+        // { visible: false, targets: [0] },
     ],
-    pageLength: 12,
+    pageLength: 6,
     destroy: true,
+    order: [[0, 'asc']],
+    // stateSave: true,
+    // pagingType: 'numbers',
+    // scrollCollapse: true,
+    // scrollY: '250px'
+    // scrollX: true,
 };
 
 const initDataTable = async () => {
@@ -22,7 +30,7 @@ const initDataTable = async () => {
 
 const list_trades = async () => {
     try {
-        const response = await fetch('http://127.0.0.1:8000/list_trades/');
+        const response = await fetch('http://127.0.0.1:8000/json_trades/');
         const data = await response.json();
 
         let content = '';
@@ -49,7 +57,7 @@ const list_trades = async () => {
                 primaryStatData += `<span class="badge rounded-pill distance">${trade.amount_primary_stat} ${trade.item_primary_stat}</span></td>`;
             } else {
                 primaryStatData += `<span>${trade.item_primary_stat}</span></td>`;
-            }            
+            }
 
 
             // Secondary stat with colors
@@ -114,14 +122,24 @@ const list_trades = async () => {
             content += `
             <tr>
                 <td>${index + 1}</td>
-                <td><img src="/static/${trade.item_icon}" class="icons" alt="icon" srcset=""><br>${trade.item_name}</td>
+                <td><img src="/static${trade.item_icon}" class="icons" alt="icon" srcset=""><br>${trade.item_name}</td>
                 ${primaryStatData}
                 ${secondaryStatData}
                 <td>${trade.bonus_1}<br>${trade.bonus_2}</td>
                 ${eliteData}
                 ${enchantData}
                 <td><img src="/static/img/others/gold.png" class="icons" alt="" srcset=""><br>${trade.price}</td>
-                <td><button type="button" class="btn btn-primary">Info</button></td>
+                <td><button class="btn btn-sm btn-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvas${trade.id}">Info</button>
+                    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas${trade.id}">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title">${trade.item_name}</h5>
+                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <p>Info about the items...</p> 
+                        </div>
+                    </div>
+                </td>
             </tr>
             `;
         });

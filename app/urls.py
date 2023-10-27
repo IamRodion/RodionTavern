@@ -1,17 +1,13 @@
 from django.urls import path
 from . import views
-from .views import HomeView, TradesView, UsersView
-
-# urlpatterns=[
-#     path('', views.home, name='home'),
-#     path('trades/', views.trades, name='trades'),
-#     path('users/', views.users, name='users')
-# ]
+from .views import HomeView, TradesView, UsersView, NewTradeView
 
 urlpatterns=[
     path('', HomeView.as_view(), name='home'),
     path('trades/', TradesView.as_view(), name='trades'),
     path('users/', UsersView.as_view(), name='users'),
-    path('list_trades/', views.list_trades, name='list_trades')
+    path('new_trade/', NewTradeView.as_view(), name='new_trade'),
+    path('json_trades/', views.json_trades, name='json_trades'),
+    path('json_items/', views.json_items, name='json_items'),
 
 ]

@@ -43,6 +43,19 @@ class TradesView(ListView):
 
     return trades
 
+#----------------------New Trade----------------------
+class NewTradeView(ListView):
+  template_name = 'new_trade.html'
+
+  def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+     context = super().get_context_data(**kwargs)
+     context['title'] = "New Trade"
+     return context
+
+  def get_queryset(self):
+    items = Item.objects.all()
+    return items
+
 
 #----------------------Users----------------------
 class UsersView(ListView):
@@ -57,8 +70,8 @@ class UsersView(ListView):
     return None
     #return User.objects.all()
 
-#----------------------Trades List for Datatable----------------------
-def list_trades(_request):
+#----------------------Trades for Datatable----------------------
+def json_trades(_request):
     trades = Trade.objects.values()
 
     trades = trades.annotate(
@@ -82,4 +95,15 @@ def list_trades(_request):
 
     # trades = list(Trade.objects.values())
     data = {'trades': trades}
+    return JsonResponse(data)
+
+
+#----------------------Items for Datatable----------------------
+def json_items(_request):
+    trades = Item.objects.values()
+
+    trades = list(trades)
+
+    # trades = list(Trade.objects.values())
+    data = {'items': trades}
     return JsonResponse(data)

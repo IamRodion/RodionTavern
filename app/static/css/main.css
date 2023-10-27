@@ -14,6 +14,11 @@ body{
     font-family: 'Ubuntu', sans-serif;
 }
 
+.navbar-nav{
+    --bs-navbar-color: rgba(255, 255, 255);
+    --bs-navbar-hover-color: rgba(255, 255, 255) !important;
+}
+
 .table th, .table td{
     vertical-align: middle !important;
 }
@@ -30,54 +35,60 @@ th{
 
 .melee {
     /* color: #00FFFF !important;
-    font-weight: bold; */
+    font-weight: bold;
+    font-size: var(--bs-body-font-size); */
 
     background-color: #00FFFF !important;
-    font-weight: 400 !important;
-    font-size: 0.9rem;
+    font-weight: 500 !important;
+    font-size: var(--bs-body-font-size);
 }
 
 .magic {
     /* color: #FFA500 !important;
-    font-weight: bold; */
+    font-weight: bold;
+    font-size: var(--bs-body-font-size); */
 
     background-color: #FFA500 !important;
-    font-weight: 400 !important;
-    font-size: 0.9rem;
+    font-weight: 500 !important;
+    font-size: var(--bs-body-font-size);
 }
 
 .distance {
     /* color: #FF69B4 !important;
-    font-weight: bold; */
+    font-weight: bold;
+    font-size: var(--bs-body-font-size); */
 
     background-color: #FF69B4 !important;
-    font-weight: 400 !important;
-    font-size: 0.9rem;
+    font-weight: 500 !important;
+    font-size: var(--bs-body-font-size);
 }
 
 .spirit {
     /* color: #87CEEB !important;
-    font-weight: bold; */
+    font-weight: bold;
+    font-size: var(--bs-body-font-size); */
 
     background-color: #87CEEB !important;
-    font-weight: 400 !important;
-    font-size: 0.9rem;
+    font-weight: 500 !important;
+    font-size: var(--bs-body-font-size);
 }
 
 .defense {
     /* color: #B3B2B2 !important;
-    font-weight: bold; */
+    font-weight: bold;
+    font-size: var(--bs-body-font-size); */
 
     background-color: #B3B2B2 !important;
-    font-weight: 400 !important;
-    font-size: 0.9rem;
+    font-weight: 500 !important;
+    font-size: var(--bs-body-font-size);
 }
 
 .elite {
     /* color: #FFD700 !important;
-    font-weight: bold; */
+    font-weight: bold;
+    font-size: var(--bs-body-font-size); */
 
     background-color: #FFD700 !important;
-    font-weight: 400 !important;
-    font-size: 0.9rem;
+    font-weight: 500 !important;
+    font-size: var(--bs-body-font-size);
 }
