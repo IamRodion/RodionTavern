@@ -58,7 +58,7 @@ class NewTradeView(ListView):
 
 
 #----------------------Users----------------------
-class UsersView(ListView):
+class UserView(ListView):
   template_name = 'users.html'
 
   def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
@@ -69,6 +69,7 @@ class UsersView(ListView):
   def get_queryset(self):
     return None
     #return User.objects.all()
+
 
 #----------------------Trades for Datatable----------------------
 def json_trades(_request):
