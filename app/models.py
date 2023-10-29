@@ -117,12 +117,6 @@ class Trade(models.Model):
     def __str__(self):
         return f"{self.item} ({self.user} @ {self.price})"
 
-    # def armour_fortified(self):
-    #     if 'Fortified' in (self.bonus_1, self.bonus_2):
-    #         return (self.item.level//10) + self.item.armour
-    #     else:
-    #         return self.item.armour
-
     def item_colored(self):
         if self.elite:
             return format_html(f'<span style="color: #FFD700;">{self.item.name}</span>')

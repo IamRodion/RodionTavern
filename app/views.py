@@ -1,10 +1,37 @@
-from django.http.response import JsonResponse
 from typing import Any
-#from django.shortcuts import render
+from django.shortcuts import redirect
+from django.http.response import JsonResponse
 from django.db.models import OuterRef, Subquery
 from django.views.generic import ListView
+from django.contrib import messages
+from django.contrib.auth import login, logout
+from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Trade, User, Item
 
+#----------------------Login----------------------
+
+class LoginView(LoginView):
+    template_name = 'login.html'
+
+    def form_valid(self, form):
+        login(self.request, form.get_user())
+
+        next_url = self.request.GET.get('next')
+        if next_url:
+            return redirect(next_url)
+        else: 
+            return redirect('home')
+
+    def form_invalid(self, form):
+        messages.error(self.request, 'Usuario o contraseña incorrectos')
+        return super().form_invalid(form)
+
+#----------------------Logout----------------------
+class LogoutView(LoginRequiredMixin, LogoutView):
+    def get(self, request):
+        logout(request)
+        return redirect('home')
 
 #----------------------Home----------------------
 class HomeView(ListView):
@@ -44,7 +71,7 @@ class TradesView(ListView):
     return trades
 
 #----------------------New Trade----------------------
-class NewTradeView(ListView):
+class NewTradeView(LoginRequiredMixin, ListView):
   template_name = 'new_trade.html'
 
   def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
@@ -58,7 +85,7 @@ class NewTradeView(ListView):
 
 
 #----------------------Users----------------------
-class UserView(ListView):
+class UserView(LoginRequiredMixin, ListView):
   template_name = 'users.html'
 
   def get_context_data(self, **kwargs: Any) -> dict[str, Any]:

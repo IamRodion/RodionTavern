@@ -30,7 +30,7 @@ const initDataTable = async () => {
 
 const list_trades = async () => {
     try {
-        const response = await fetch('http://127.0.0.1:8000/json_trades/');
+        const response = await fetch('/json_trades/');
         const data = await response.json();
 
         let content = '';
@@ -136,7 +136,33 @@ const list_trades = async () => {
                             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                         </div>
                         <div class="offcanvas-body">
-                            <p>Info about the items...</p> 
+                            <div class="row justify-content-md-center">
+                            <div class="col-8">
+                            <table class="table table-striped border-primary table-bordered align-middle">
+                                <thead>
+                                    <tr class="table-primary text-center">
+                                        <th><img src="/static${trade.item_icon}" class="icons" alt="item-icon" srcset=""><br>${trade.item_name}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>${trade.amount_primary_stat} ${trade.item_primary_stat} </td>
+                                    </tr>
+                                    <tr>
+                                        <td>${trade.amount_secondary_stat} ${trade.secondary_stat}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>${trade.bonus_1}<br>${trade.bonus_2}</td>
+                                    </tr>
+                                    <tr>
+                                    <td><img src="/static/img/others/gold.png" class="icons" alt="Gold Icon"> ${trade.price}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>${trade.username}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            </div>
                         </div>
                     </div>
                 </td>

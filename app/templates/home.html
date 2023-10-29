@@ -2,5 +2,10 @@
 
 {% block content %}
     <h1>{{ title }}</h1>
-    <p>Hi {{ user.username }}, this is a webpage for trading items in Mirage Realms</p>
+    <p>Hi 
+    {% if user.is_authenticated %}
+        {{ user.username }},
+    {% else %}
+        user,
+    {% endif %} this is a webpage for trading items in Mirage Realms</p>
 {% endblock %}
