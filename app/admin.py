@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import User, Item, Trade
+from .models import Item, Trade
+from django.contrib.auth.models import User 
+from django.contrib.auth.admin import UserAdmin
 
 # Register your models here.
 
@@ -7,12 +9,21 @@ from .models import User, Item, Trade
 # admin.site.register(Item)
 # admin.site.register(Trade)
 
+admin.site.unregister(User)
 @admin.register(User)
-class UserAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'username')
-    list_display_links = ('name', 'username')
+class MyUserAdmin(UserAdmin):
+    list_display = ('username', 'email', 'first_name', 'last_name', 'is_staff')
+    list_display_links = ('username', 'email')
     ordering = ('id',)
-    search_fields = ('name', 'username')
+    search_fields = ('username', 'email')
+
+
+# @admin.register(User)
+# class UserAdmin(admin.ModelAdmin):
+#     list_display = ('id', 'name', 'username')
+#     list_display_links = ('name', 'username')
+#     ordering = ('id',)
+#     search_fields = ('name', 'username')
 
 
 @admin.register(Item)
@@ -39,4 +50,4 @@ class TradeAdmin(admin.ModelAdmin):
     list_display_links = ('id',)
     list_filter = ('user', 'date')
     ordering = ('id', 'date', 'user')
-    search_fields = ('item', 'user')
+    search_fields = ('user__first_name', 'item__name') #item, item_id, price, secondary_stat, user, user_id search_fields = ['foreignkeyfield__name']

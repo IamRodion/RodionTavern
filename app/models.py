@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.html import format_html
+from django.contrib.auth.models import User
 
 colors = {
     'Magic': '#FFA500',
@@ -12,17 +13,17 @@ colors = {
 
 # Create your models here.
 
-class User(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=100)
-    username = models.CharField(max_length=100, unique=True)
-    password = models.CharField(max_length=100)
+# class User(models.Model): # Modelo para usuarios
+#     id = models.AutoField(primary_key=True)
+#     name = models.CharField(max_length=100)
+#     username = models.CharField(max_length=100, unique=True)
+#     password = models.CharField(max_length=100)
 
-    def __str__(self):
-        return self.username
+#     def __str__(self):
+#         return self.username
 
 
-class Item(models.Model):
+class Item(models.Model): # Modelo para items
     SLOT_CHOICES = [
         ('Helmet', 'Helmet'),
         ('Chest', 'Chest'),
@@ -68,7 +69,7 @@ class Item(models.Model):
     primary_stat_colored.short_description = "Primary"
     #class_item.admin_order_field = "name"
 
-class Trade(models.Model):
+class Trade(models.Model): # Modelo para trades
     SEC_STAT_CHOICES = [
         ('Spirit', 'Spirit'),
         ('Defense', 'Defense'),

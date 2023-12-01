@@ -44,7 +44,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {% if user.is_authenticated %}
-                                {{ user.username }}
+                                {{ user.first_name }}
                             {% else %}
                                 User
                             {% endif %}
@@ -52,6 +52,10 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item text-primary" href="{% url 'user' %}">My Trades</a></li>
                             {% if user.is_authenticated %}
+                                {% if user.is_staff %}
+                                <!-- <li><a class="dropdown-item text-primary" href="/admin/">Admin Panel</a></li> -->
+                                <li><a class="dropdown-item text-primary" href="/admin/">Admin Panel</a></li>
+                                {% endif %}
                                 <li><a class="dropdown-item text-primary" href="{% url 'logout' %}">Logout</a></li>
                             {% else %}
                                 <li><a class="dropdown-item text-primary" href="{% url 'login' %}">Login</a></li>

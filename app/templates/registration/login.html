@@ -21,6 +21,7 @@
 </head>
 
 <body>
+
     <section class="vh-100 gradient-custom">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
@@ -31,12 +32,11 @@
 
                                 <h2 class="fw-bold mb-2">Login</h2>
                                 <span class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-whitetext-decoration-none">
-                                    <img src="/static/img/others/ale.png" class="bi d-block mx-auto mb-1" alt="App Logo" width="50" height="50">
+                                    <img src="{% static 'img/others/ale.png' %}" class="bi d-block mx-auto mb-1" alt="App Logo" width="50" height="50">
                                 </span>
 
                                 <div class="form-group mt-3 text-primary">
-                                    <form method="POST">
-                                        {% csrf_token %}
+                                    <form method="POST">{% csrf_token %}
                                         <div class="form-floating mb-3">
                                             <input name="username" class="form-control text-primary" id="floatingInput" type="text" placeholder="Username" autofocus required autocomplete="off">
                                             <label class="text-primary" for="floatingInput">Username</label>

@@ -48,6 +48,29 @@
                                         <div>
                                             <button type="submit" class="btn btn-light form-label mt-4">Login</button>
                                         </div>
+
+                                        <div class="div">
+                                            {% if messages %}
+                                              {% for message in messages %}
+                                              
+                                                {% if message.tags == 'error' %}
+                                                  <div class="alert alert-dismissible alert-danger">
+                                                    <strong>{{ message }}</strong>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                                  </div>
+                                                
+                                                {% else %}
+                                                
+                                                  <div class="alert alert-dismissible alert-{{ message.tags }}">
+                                                    <strong>{{ message }}</strong>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                                  </div>
+                                                  
+                                                {% endif %}
+                                                
+                                              {% endfor %}
+                                            {% endif %}
+                                          </div>
                                     </form>
                                 </div>
                             </div>

@@ -9,7 +9,7 @@ const dataTableOptions = {
         { searchable: false, targets: [0, 7, 8] },
         // { visible: false, targets: [0] },
     ],
-    pageLength: 6,
+    pageLength: 20,
     destroy: true,
     order: [[0, 'asc']],
     // stateSave: true,
@@ -116,8 +116,29 @@ const list_trades = async () => {
             } else if (trade.enchant === 'Physical') {
                 enchantData += `physical.png" class="icons" alt="${trade.enchant}"><br>${trade.enchant}</td>`;
             } else {
-                enchantData = `<td>${trade.enchant ?? 'No'}</td>`;
+                enchantData = `<td>${trade.enchant ?? 'Not Enchanted'}</td>`;
             }
+
+            let primary_and_secondary_statdata = `<tr>`;
+            if (trade.item_primary_stat == trade.secondary_stat){
+                amount_stat = trade.amount_primary_stat + trade.amount_secondary_stat
+                if (trade.item_primary_stat === 'Magic') {
+                    primary_and_secondary_statdata += `<td><span class="badge rounded-pill magic">${amount_stat} ${trade.item_primary_stat}</span></td></tr>`;
+                } else if (trade.item_primary_stat === 'Melee') {
+                    primary_and_secondary_statdata += `<td><span class="badge rounded-pill melee">${amount_stat} ${trade.item_primary_stat}</span></td></tr>`;
+                } else if (trade.item_primary_stat === 'Distance') {
+                    primary_and_secondary_statdata += `<td><span class="badge rounded-pill distance">${amount_stat} ${trade.item_primary_stat}</span></td></tr>`;
+                } else {
+                    primary_and_secondary_statdata += `<td><span>${trade.item_primary_stat}</span></td></tr>`;
+                }
+                primary_and_secondary_statdata += `<tr><td><span class="badge rounded-pill stamina">${trade.item_stamina} Stamina</span></td></tr>`
+                
+            } else {
+                primary_and_secondary_statdata += `${primaryStatData}</tr>
+                <tr><td><span class="badge rounded-pill stamina">${trade.item_stamina} Stamina</span></td></tr>
+                <tr>${secondaryStatData}</tr>`
+            }
+
 
             content += `
             <tr>
@@ -135,33 +156,28 @@ const list_trades = async () => {
                             <h5 class="offcanvas-title">${trade.item_name}</h5>
                             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                         </div>
-                        <div class="offcanvas-body">
-                            <div class="row justify-content-md-center">
-                            <div class="col-8">
-                            <table class="table table-striped border-primary table-bordered align-middle">
-                                <thead>
-                                    <tr class="table-primary text-center">
-                                        <th><img src="/static${trade.item_icon}" class="icons" alt="item-icon" srcset=""><br>${trade.item_name}</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>${trade.amount_primary_stat} ${trade.item_primary_stat} </td>
-                                    </tr>
-                                    <tr>
-                                        <td>${trade.amount_secondary_stat} ${trade.secondary_stat}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>${trade.bonus_1}<br>${trade.bonus_2}</td>
-                                    </tr>
-                                    <tr>
-                                    <td><img src="/static/img/others/gold.png" class="icons" alt="Gold Icon"> ${trade.price}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>${trade.username}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        
+                        <div class="row justify-content-md-center">
+                            <div class="col col-11">
+                                <div class="offcanvas-body">
+                                    <table class="table table-striped border-primary table-bordered align-middle">
+                                        <thead>
+                                            <tr class="table-primary text-center">
+                                                <th><img src="/static${trade.item_icon}" class="icons" alt="item-icon" srcset=""><br>${trade.item_name}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td>${trade.item_level} Level Requirement</td></tr>
+                                            <tr><td>${trade.armour} Armour</td></tr>
+                                            ${primary_and_secondary_statdata}
+                                            <tr><td>${trade.bonus_1}<br>${trade.bonus_2}</td></tr>
+                                            <tr>${enchantData}</tr>
+                                            <tr>${eliteData}</tr>
+                                            <tr><td><img src="/static/img/others/gold.png" class="icons" alt="Gold Icon"> ${trade.price}</td></tr>
+                                            <tr><td>${trade.username}</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>

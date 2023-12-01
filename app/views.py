@@ -1,7 +1,7 @@
 from typing import Any
 from django.shortcuts import redirect
 from django.http.response import JsonResponse
-from django.db.models import OuterRef, Subquery
+from django.db.models import OuterRef, Subquery, Case, When, IntegerField, F
 from django.views.generic import ListView
 from django.contrib import messages
 from django.contrib.auth import login, logout
@@ -24,7 +24,7 @@ class LoginView(LoginView):
             return redirect('home')
 
     def form_invalid(self, form):
-        messages.error(self.request, 'Usuario o contraseña incorrectos')
+        messages.error(self.request, 'User or Password incorrect')
         return super().form_invalid(form)
 
 #----------------------Logout----------------------
@@ -59,7 +59,7 @@ class TradesView(ListView):
     trades = Trade.objects.all()
     trades = trades.annotate(
         username=Subquery(
-            User.objects.filter(id=OuterRef('user_id')).values('username')[:1] 
+            User.objects.filter(id=OuterRef('user_id')).values('first_name')[:1] 
         )
     )
     trades = trades.annotate(
@@ -104,7 +104,7 @@ def json_trades(_request):
 
     trades = trades.annotate(
         username=Subquery(
-            User.objects.filter(id=OuterRef('user_id')).values('username')[:1]
+            User.objects.filter(id=OuterRef('user_id')).values('first_name')[:1]
         )  
     )
 
@@ -112,11 +112,28 @@ def json_trades(_request):
         item_icon=Subquery(
             Item.objects.filter(id=OuterRef('item_id')).values('icon')[:1]
         ),
+        item_level=Subquery(
+            Item.objects.filter(id=OuterRef('item_id')).values('level')[:1]
+        ),
         item_name=Subquery(
             Item.objects.filter(id=OuterRef('item_id')).values('name')[:1]
         ),
+        # item_armour=Subquery(
+        #     Item.objects.filter(id=OuterRef('item_id')).values('armour')[:1]
+        # ),
+
+        armour=Case(
+            When(bonus_1="Fortified", then=F('item__armour') + F('item__level') / 10),
+            When(bonus_2="Fortified", then=F('item__armour') + F('item__level') / 10),
+            default=F('item__armour'),
+            output_field=IntegerField(),
+        ),
+
         item_primary_stat=Subquery(
             Item.objects.filter(id=OuterRef('item_id')).values('primary_stat')[:1]
+        ),
+        item_stamina=Subquery(
+            Item.objects.filter(id=OuterRef('item_id')).values('stamina')[:1]
         )
     )
     trades = list(trades)
