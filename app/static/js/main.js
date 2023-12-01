@@ -7,11 +7,14 @@ const dataTableOptions = {
         // { className:'centered', targets: [0, 1, 2, 3, 4, 5, 6, 7] },
         { orderable: false, targets: [3, 4, 8] },
         { searchable: false, targets: [0, 7, 8] },
-        // { visible: false, targets: [0] },
+        { visible: false, targets: [0, 9] },
     ],
     pageLength: 20,
     destroy: true,
     order: [[0, 'asc']],
+    language: {
+        searchPlaceholder: "Item, Stat, Bonus, or Seller"
+    },
     // stateSave: true,
     // pagingType: 'numbers',
     // scrollCollapse: true,
@@ -36,18 +39,6 @@ const list_trades = async () => {
         let content = '';
         data.trades.forEach((trade, index) => {
 
-            // Primary stat with colors
-            // let primaryStatData = `<td>${trade.amount_primary_stat}<br>`;
-            // if (trade.item_primary_stat === 'Magic') {
-            //     primaryStatData += `<span class="magic">${trade.item_primary_stat}</span></td>`;
-            // } else if (trade.item_primary_stat === 'Melee') {
-            //     primaryStatData += `<span class="melee">${trade.item_primary_stat}</span></td>`;
-            // } else if (trade.item_primary_stat === 'Distance') {
-            //     primaryStatData += `<span class="distance">${trade.item_primary_stat}</span></td>`;
-            // } else {
-            //     primaryStatData += `<span>${trade.item_primary_stat}</span></td>`;
-            // }
-
             let primaryStatData = `<td>`;
             if (trade.item_primary_stat === 'Magic') {
                 primaryStatData += `<span class="badge rounded-pill magic">${trade.amount_primary_stat} ${trade.item_primary_stat}</span></td>`;
@@ -58,23 +49,6 @@ const list_trades = async () => {
             } else {
                 primaryStatData += `<span>${trade.item_primary_stat}</span></td>`;
             }
-
-
-            // Secondary stat with colors
-            // let secondaryStatData = `<td>${trade.amount_secondary_stat}<br>`;
-            // if (trade.secondary_stat === 'Magic') {
-            //     secondaryStatData += `<span class="magic">${trade.secondary_stat}</span></td>`;
-            // } else if (trade.secondary_stat === 'Melee') {
-            //     secondaryStatData += `<span class="melee">${trade.secondary_stat}</span></td>`;
-            // } else if (trade.secondary_stat === 'Distance') {
-            //     secondaryStatData += `<span class="distance">${trade.secondary_stat}</span></td>`;
-            // } else if (trade.secondary_stat === 'Spirit') {
-            //     secondaryStatData += `<span class="spirit">${trade.secondary_stat}</span></td>`;
-            // } else if (trade.secondary_stat === 'Defense') {
-            //     secondaryStatData += `<span class="defense">${trade.secondary_stat}</span></td>`;
-            // } else {
-            //     secondaryStatData += `<span>${trade.item_primary_stat}</span></td>`;
-            // }
 
             let secondaryStatData = `<td>`;
             if (trade.secondary_stat === 'Magic') {
@@ -90,8 +64,6 @@ const list_trades = async () => {
             } else {
                 secondaryStatData += `<span>${trade.item_primary_stat}</span></td>`;
             }
-
-
 
             // Elite with icon
             let eliteData = `<td><img src="/static/img/others/`;
@@ -151,7 +123,7 @@ const list_trades = async () => {
                 ${enchantData}
                 <td><img src="/static/img/others/gold.png" class="icons" alt="" srcset=""><br>${trade.price}</td>
                 <td><button class="btn btn-sm btn-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvas${trade.id}">Info</button>
-                    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas${trade.id}">
+                    <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvas${trade.id}">
                         <div class="offcanvas-header">
                             <h5 class="offcanvas-title">${trade.item_name}</h5>
                             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -167,14 +139,14 @@ const list_trades = async () => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr><td>${trade.item_level} Level Requirement</td></tr>
+                                            <tr><td>Req. level ${trade.item_level}</td></tr>
                                             <tr><td>${trade.armour} Armour</td></tr>
                                             ${primary_and_secondary_statdata}
                                             <tr><td>${trade.bonus_1}<br>${trade.bonus_2}</td></tr>
                                             <tr>${enchantData}</tr>
                                             <tr>${eliteData}</tr>
                                             <tr><td><img src="/static/img/others/gold.png" class="icons" alt="Gold Icon"> ${trade.price}</td></tr>
-                                            <tr><td>${trade.username}</td></tr>
+                                            <tr><td>Seller: <b>${trade.username}</b></td></tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -182,6 +154,7 @@ const list_trades = async () => {
                         </div>
                     </div>
                 </td>
+                <td>${trade.username}</td>
             </tr>
             `;
         });
